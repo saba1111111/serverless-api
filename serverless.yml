@@ -1,0 +1,22 @@
+service: serverless-api # Name of our serverless application
+frameworkVersion: "3" # Version of Serverless framework we using
+useDotenv: true
+
+provider:
+  name: aws # Specifies the cloud provider where the service will be deployed
+  runtime: nodejs20.x #  Defines the runtime environment for your functions
+  environment: # Define Environment Variables
+    DATABASE_URL: ${env:DATABASE_URL}
+
+# The functions section declares the individual functions that make up your serverless application.
+# Define handlers and the events that trigger them.
+functions:
+  api: # Define name of a function.
+    handler: src/index.handler # This specifies function handler, the entry point of functions execution.
+    events: # In Events section, we write all events when this function should trigger.
+      - httpApi: "*" # This means all http requests will trigger this function.
+
+# Plugins extend the functionality of the Serverless Framework, adding new features or customizing the build and deployment process.
+plugins:
+  - serverless-offline
+  - serverless-dotenv-plugin
