@@ -6,8 +6,6 @@ provider:
   name: aws
   region: us-west-2
   runtime: nodejs20.x
-  environment:
-    DATABASE_URL_SSM_PARAM: ${env:DATABASE_URL_SSM_PARAM}
   iam:
     role:
       name: serverless-api-ssm-role-${env:STAGE, "prod"}
