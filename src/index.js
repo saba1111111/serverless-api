@@ -1,10 +1,14 @@
 const serverless = require("serverless-http");
 const express = require("express");
+const getDbClient = require("./libs/helpers/get-db-client.helper");
 const app = express();
 
-app.get("/", (req, res, next) => {
+app.get("/", async (req, res, next) => {
+  const db = await getDbClient();
+  const result = await db`select now()`;
+
   return res.status(200).json({
-    message: process.env.DATABASE_URL,
+    result,
   });
 });
 
