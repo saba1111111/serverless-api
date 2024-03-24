@@ -10,7 +10,7 @@ provider:
     DATABASE_URL_SSM_PARAM: ${env:DATABASE_URL_SSM_PARAM}
   iam:
     role:
-      name: serverless-api-ssm-role
+      name: serverless-api-ssm-role-${env:STAGE, "prod"}
       statements:
         - Effect: "Allow"
           Resource: "*"
